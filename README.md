@@ -30,6 +30,6 @@
 ---
 ### 📺 Hình Ảnh Kết Quả
 
-➡️ https://youtu.be/b6F671ugU6M
+➡️ https://lhung894.github.io/Detection_DOSAttack_Snort/
 
 ---
