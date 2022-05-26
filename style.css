@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     /*background: #000116;*/
-    background-image: url("/KQ/bia.jpg");
+    background-image: url("KQ/bia.jpg");
 }
 
 .slider {
@@ -80,7 +79,8 @@ body {
     opacity: 1;
 }
 
-.prev-btn, .next-btn {
+.prev-btn,
+.next-btn {
     z-index: 999;
     font-size: 2em;
     color: #222;
@@ -124,7 +124,6 @@ body {
     .slider {
         width: 100%;
     }
-
     .slider .slide .info {
         position: relative;
         width: 80%;
@@ -138,7 +137,6 @@ body {
         font-size: 1.8em;
         line-height: 40px;
     }
-
     .slider .slide .info p {
         font-size: 0.9em;
     }
