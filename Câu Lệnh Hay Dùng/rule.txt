@@ -1,0 +1,81 @@
+https://stackoverflow.com/questions/28676484/how-can-i-generate-immediate-pop-up-when-a-traffic-matched-with-a-snort-rule/28733411#28733411
+
+1)sudo /usr/local/bin/snort -dev -i ens33 -c /etc/snort/snort.conf -l /var/log/snort/ -A full
+
+2)sudo tail /var/log/snort/alert
+
+3)sudo cat /var/log/snort/alert | grep -i‬‬ ‬‬‫‪‫‪detected
+
+4)sudo snort -T -c /etc/snort/snort.conf
+
+5)sudo /usr/local/bin/snort -A console -c /etc/snort/snort.conf -i ens33
+
+sudo tail -f /var/log/graylog-server/server.log
+
+6)sudo gedit /lib/systemd/system/snort.service
+[Unit]
+Description=Snort NIDS Daemon
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/snort -q -u snort -g snort -c /etc/snort/snort.conf
+
+[Install]
+WantedBy=multi-user.target
+
+systemctl enable snort
+systemctl start snort
+
+7)Cron syslog 
+sudo grep CRON /var/log/syslog
+
+sudo ps aux | grep snort
+
+sudo killall /usr/local/bin/snort
+
+tcp.flags.syn == 1 and tcp.flags.ack == 0
+
+8) icmp flood 
+sudo hping3 --icmp --rand-source 192.168.147.136 -p 80 --flood 
+
+sudo hping3 -S --rand-source 192.168.147.136 -p 80 --flood
+
+
+netstat -anp | grep -w 80 | grep ESTABLISHED | wc -l
+         -apn
+
+|| echo "$line" | grep -q "UDP DOS" || echo "$line" | grep -q "ICMP Flood"
+
+
+
+===================================================================
+
+#* * * * * /bin/sh /home/weed/Desktop/test.sh
+#* * * * * ( sleep 10 ; /bin/sh /home/weed/Desktop/test.sh )
+#* * * * * ( sleep 20 ; /bin/sh /home/weed/Desktop/test.sh )
+#* * * * * ( sleep 30 ; /bin/sh /home/weed/Desktop/test.sh )
+#* * * * * ( sleep 40 ; /bin/sh /home/weed/Desktop/test.sh )
+#* * * * * ( sleep 50 ; /bin/sh /home/weed/Desktop/test.sh )
+
+* * * * * /bin/sh /home/weed/Desktop/test.sh
+* * * * * ( sleep 10 ; /bin/sh /home/weed/Desktop/test.sh )
+* * * * * ( sleep 20 ; /bin/sh /home/weed/Desktop/test.sh )
+* * * * * ( sleep 30 ; /bin/sh /home/weed/Desktop/test.sh )
+* * * * * ( sleep 40 ; /bin/sh /home/weed/Desktop/test.sh )
+* * * * * ( sleep 50 ; /bin/sh /home/weed/Desktop/test.sh )
+
+
+#-------------------------------------------------------------------
+hoặc dùng cái này
+#!/bin/bash
+i=0
+
+while [ $i -lt 6 ]; do
+  /run/your/command &
+  sleep 10
+  i=$(( i + 1 ))
+done
+
+
+

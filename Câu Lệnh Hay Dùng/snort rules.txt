@@ -1,0 +1,22 @@
+##TCP Synflood Attack
+#alert tcp any any -> 192.168.147.136 80 (flags:S; msg:"TCP SYN DOS Flood Detection!!!"; detection_filter: track by_dst , count 100, #seconds 10; sid: 10001;)
+
+alert tcp any any -> 192.168.147.136 80 (flags:S; msg:"TCP SYN DOS Flood Detection!!!"; detection_filter: track by_dst , count 300, seconds 5; sid: 1000001;)
+
+
+
+##UDP Flood Attack
+#alert udp any any -> 192.168.147.136 80 ( msg:”UDP DOS Flood Detection!!!“; detection_filter: track by_dst, count 1000, seconds 5; 
+#sid: 10002;)
+
+alert udp any any -> 192.168.147.136 80 ( msg:”UDP DOS Flood Detection!!!“; detection_filter: track by_dst, count 1000, seconds 5; sid:1000002;)
+
+##ICMP Flood Attack
+#alert icmp any any -> 192.168.147.136 80 (msg:"ICMP Flood Attack!!!!"; sid:1000001; rev:1; classtype:icmp-event; detection_filter:track #by_dst, count 500, seconds 3;)
+
+alert icmp any any -> 192.168.147.136 80 (msg:"ICMP Flood Attack!!!!"; sid:1000003; rev:3; classtype:icmp-event; detection_filter:track by_dst, count 500, seconds 3;)
+
+
+##HTTP GET Flood Attack
+#alert tcp any any -> 192.168.147.136 80 (msg:"GET Request flood attempt"; flow:to_server,established; content:"GET"; nocase; http_method; #detection_filter:track by_dst, count 30, seconds 30; metadata: service http;sid:1000004; rev:4;)
+alert tcp any any -> 192.168.147.136 80 (msg:"Possible Slowloris Attack Detected";content:"GET /"; nocase; http_method; content:"User-Agent|3a| Mozilla/5.0 (compatible\; MSIE 10.0\; Windows NT 6.1\; Trident/6.0)|0d 0a|"; http_header; ;offset:10;depth:100; sid:10000007;)
